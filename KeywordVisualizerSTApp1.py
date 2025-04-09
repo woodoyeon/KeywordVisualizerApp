@@ -3,6 +3,11 @@ import pandas as pd
 from lib.NaverNewsCrawler1 import search_naver_news
 from lib.myTextMining1 import get_tfidf_vectorizer
 from lib.STVisualizer1 import plot_freq_bar, plot_wordcloud
+import jpype
+
+# JVM이 아직 시작되지 않았으면 시작
+if not jpype.isJVMStarted():
+    jpype.startJVM(jpype.getDefaultJVMPath())
 
 st.title("🔍 키워드 기반 뉴스 분석 대시보드")
 
