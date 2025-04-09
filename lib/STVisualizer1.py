@@ -20,7 +20,7 @@ def plot_wordcloud(df):
     font_path = "NanumGothic-Regular"
 
     wc = WordCloud(
-        font_path=font_path,
+        font_path="NanumGothic-Regular.ttf",
         background_color='white',
         width=800,
         height=400
