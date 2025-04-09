@@ -4,3 +4,4 @@ scikit-learn
 konlpy
 matplotlib
 wordcloud
+jpype1
