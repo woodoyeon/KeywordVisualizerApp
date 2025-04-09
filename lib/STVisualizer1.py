@@ -17,7 +17,7 @@ def plot_wordcloud(df):
     word_freq = df.sum(axis=0).to_dict()
 
     # 폰트 경로 지정 (예: 프로젝트에 업로드된 폰트)
-    font_path = "NanumGothic.ttf"
+    font_path = "NanumGothic-Regular"
 
     wc = WordCloud(
         font_path=font_path,
