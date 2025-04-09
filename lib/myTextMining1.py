@@ -2,16 +2,11 @@ from konlpy.tag import Okt
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# 사용자 정의 토크나이저 함수
-def my_tokenizer(text):
-    text = re.sub(r'[^\uAC00-\uD7A3\s]', '', text)  # 한글과 공백만 남김
-    okt = Okt()
-    tokens = okt.morphs(text)
-    stopwords = ['은', '는', '이', '가', '을', '를', '에', '의', '도', '으로', '하고']
-    return [word for word in tokens if word not in stopwords]
+# 한글 단어 추출용 tokenizer
+def simple_korean_tokenizer(text):
+    return re.findall(r'[가-힣]{2,}', text)  # 2글자 이상 한글만 추출
 
-# TF-IDF 벡터라이저 생성 및 변환 함수
 def get_tfidf_vectorizer(docs):
-    vectorizer = TfidfVectorizer(tokenizer=my_tokenizer, max_features=1000)
+    vectorizer = TfidfVectorizer(tokenizer=simple_korean_tokenizer, max_features=100)
     tfidf_matrix = vectorizer.fit_transform(docs)
     return vectorizer, tfidf_matrix
