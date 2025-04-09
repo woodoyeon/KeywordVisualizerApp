@@ -13,15 +13,21 @@ def plot_freq_bar(df, top_n=20):
     st.pyplot(plt)
 
 # ✅ 워드클라우드 그리기
-def plot_wordcloud(df, top_n=50):
-    word_freq = df.sum().sort_values(ascending=False).head(top_n)
-    wordcloud = WordCloud(
-        font_path="./NanumGothic.ttf",  # 한글 폰트 경로 필요
+def plot_wordcloud(df):
+    word_freq = df.sum(axis=0).to_dict()
+
+    # 폰트 경로 지정 (예: 프로젝트에 업로드된 폰트)
+    font_path = "NanumGothic.ttf"
+
+    wc = WordCloud(
+        font_path=font_path,
         background_color='white',
         width=800,
         height=400
     ).generate_from_frequencies(word_freq)
-    plt.figure(figsize=(10, 6))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis("off")
-    st.pyplot(plt)
+
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis('off')
+    plt.tight_layout()
+    plt.show()
