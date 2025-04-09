@@ -2,13 +2,19 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import streamlit as st
 import pandas as pd
+import matplotlib.font_manager as fm  # 폰트 설정용
+
+# ✅ 한글 폰트 설정 (matplotlib 그래프용)
+font_path = "NanumGothic-Regular.ttf"  # 업로드한 한글 폰트
+fontprop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = fontprop.get_name()
 
 # ✅ 단어 수평 막대 그래프 그리기
 def plot_freq_bar(df, top_n=20):
     word_freq = df.sum().sort_values(ascending=False).head(top_n)
     plt.figure(figsize=(10, 6))
     word_freq.plot(kind='barh')
-    plt.gca().invert_yaxis()  # 가장 많은 단어가 위로 오도록
+    plt.gca().invert_yaxis()
     plt.title('Top Words by TF-IDF Score')
     st.pyplot(plt)
 
@@ -16,11 +22,8 @@ def plot_freq_bar(df, top_n=20):
 def plot_wordcloud(df):
     word_freq = df.sum(axis=0).to_dict()
 
-    # 폰트 경로 지정 (예: 프로젝트에 업로드된 폰트)
-    font_path = "NanumGothic-Regular"
-
     wc = WordCloud(
-        font_path="NanumGothic-Regular.ttf",
+        font_path="NanumGothic-Regular.ttf",  # 워드클라우드에도 한글 폰트 지정
         background_color='white',
         width=800,
         height=400
