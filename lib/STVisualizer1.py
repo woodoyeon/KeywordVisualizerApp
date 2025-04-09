@@ -30,4 +30,4 @@ def plot_wordcloud(df):
     plt.imshow(wc, interpolation='bilinear')
     plt.axis('off')
     plt.tight_layout()
-    plt.show()
+    st.pyplot(plt)
